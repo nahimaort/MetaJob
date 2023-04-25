@@ -1,0 +1,7 @@
+{
+  "name": "MetaJob",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
