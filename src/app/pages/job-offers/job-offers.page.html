@@ -1,13 +1,20 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>job-offers</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="ion-align-items-center">
+  <div class="greetings-container">
+    <ion-text class="greetings">
+      Hello Simon 👋
+    </ion-text>
+    <ion-avatar>
+      <img [src]="profileImg" />
+    </ion-avatar>
+  </div>
+  <ion-text>
+    <h1>Find Jobs</h1>
+  </ion-text>
+  <div class="filters-container">
+    <ion-chip *ngFor="let filter of filters" [color]="selectedFilter === filter ? 'tertiary' : 'medium'" (click)="selectedFilter = filter">
+      <ion-label>{{ filter }}</ion-label>
+    </ion-chip>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">job-offers</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
 </ion-content>
