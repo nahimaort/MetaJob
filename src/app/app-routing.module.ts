@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: 'onboarding',
     loadChildren: () => import('./pages/onboarding/onboarding.module').then( m => m.OnboardingPageModule)
+  },
+  {
+    path: 'job-offers',
+    loadChildren: () => import('./pages/job-offers/job-offers.module').then( m => m.JobOffersPageModule)
   }
 ];
 @NgModule({
