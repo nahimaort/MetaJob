@@ -1,7 +1,10 @@
-<ion-content [fullscreen]="true" class="main-content">
-  <ion-img [src]="this.logoImg"></ion-img>
-  <ion-text class="title">Your search for the next dream job is over 🚀</ion-text>
-  <ion-button class="start-button">
+<ion-content [fullscreen]="true" [scrollY]='false' class="main-content">
+  <ion-img [src]="this.logoImg" class="logo"></ion-img>
+  <div class="title-container">
+    <ion-text class="title">Your search for the next dream job is over 🚀</ion-text>
+  </div>
+  <ion-button class="start-button" shape="round">
     Start searching
   </ion-button>
+  <ion-img [src]="this.onboardingImg" class="onboarding-image"></ion-img>
 </ion-content>

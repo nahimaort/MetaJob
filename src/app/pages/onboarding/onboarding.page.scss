@@ -1,12 +1,20 @@
-ion-img {
-    width: 150px;
-    height: 50px;
+.logo {
+    width: 100%;
+    height: 40px;
+    margin-top: 1em;
+    margin-bottom: 2em;
 }
 
 .title {
     font-family: 'Roboto';
     font-weight: 500;
-    font-size: 48px;
+    font-size: 46px;
+    
+}
+
+.title-container {
+    padding-left: 2em;
+    padding-right: 2em;
 }
 
 .main-content {
@@ -17,7 +25,15 @@ ion-img {
 }
 
 .start-button {
-    width: 340px;
-    height: 56px;
-    color: 'red';
+    width: 330px;
+    height: 50px;
+  --background: #5424FD;
+  font-family: 'Roboto';
+  font-weight: 500;
+  margin-top: 3em;
+}
+
+.onboarding-image {
+    position: absolute;
+    bottom: 0;
 }
