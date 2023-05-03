@@ -15,34 +15,5 @@
       <ion-label>{{ filter }}</ion-label>
     </ion-chip>
   </div>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Google</ion-card-subtitle>
-      <ion-card-title>Senior UX Designer</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-row>
-        <ion-chip color="primary" mode="ios" outline="true">
-          <ion-icon name="location-outline" color="primary"></ion-icon>
-          <ion-label>New York</ion-label>
-        </ion-chip>
-        <ion-chip color="primary" mode="ios" outline="true">
-          <ion-icon name="person-outline" color="primary"></ion-icon>
-          <ion-label>3 years exp.</ion-label>
-        </ion-chip>
-        <ion-chip color="primary" mode="ios" outline="true">
-          <ion-icon name="time-outline" color="primary"></ion-icon>
-          <ion-label>Fulltime</ion-label>
-        </ion-chip>
-      </ion-row>
-      <ion-row>
-        <ion-text>
-          UX Designers are the synthesis of design and development. They take Google's most innovative product concepts...Read More
-        </ion-text>
-      </ion-row>
-      
-    </ion-card-content>
-  </ion-card>
-
-
+  <app-job-offers-card *ngFor="let jobOffer of jobOffers" [jobOffer]="jobOffer"></app-job-offers-card>
 </ion-content>
