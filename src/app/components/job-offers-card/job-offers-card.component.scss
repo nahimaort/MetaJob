@@ -1,0 +1,37 @@
+ion-card-content {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+
+  ion-chip {
+    font-size: 13px;
+
+    ion-icon {
+      width: 15px;
+    }
+  }
+}
+
+.details-div {
+  background-color: #2B2B2B;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 1em;
+  padding-right: 1em;
+  align-items: center;
+}
+
+.posted {
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  display: flex;
+}
+.wage {
+  font-size: 18px;
+  font-weight: 800;
+}

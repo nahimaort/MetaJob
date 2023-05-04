@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, get } from 'firebase/database';
 import { environment } from 'src/environments/environment';
 import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
-
+import firebase from 'firebase/compat/app';
+import initializeApp = firebase.initializeApp;
 
 @Injectable({
   providedIn: 'root'
