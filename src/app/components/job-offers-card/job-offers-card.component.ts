@@ -9,6 +9,7 @@ import { getJobOfferImage } from '../../services/firebase.service';
 })
 export class JobOffersCardComponent implements OnInit {
   @Input() jobOffer: JobOffer = {} as JobOffer
+  @Input() color: string | undefined;
   jobOfferImage: any;
 
   constructor() { }

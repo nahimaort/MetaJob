@@ -1,26 +1,33 @@
-<ion-card>
+<ion-card [style.background-color]="color">
   <ion-card-header>
-    <img [src]=jobOfferImage style="height:50px; width:50px">
-    <ion-card-subtitle>{{jobOffer.company}}</ion-card-subtitle>
-    <ion-card-title>{{jobOffer.title}}</ion-card-title>
+
+    <ion-row>
+      <ion-col size="2" id="company-img-col">
+        <ion-img [src]=jobOfferImage id="company-img"></ion-img>
+      </ion-col>
+      <ion-col>
+        <ion-card-subtitle>{{jobOffer.company}}</ion-card-subtitle>
+        <ion-card-title>{{jobOffer.title}}</ion-card-title>
+      </ion-col>
+    </ion-row>
   </ion-card-header>
   <ion-card-content>
-    <ion-row>
+    <ion-row id="chips-container">
       <ion-chip color="primary" mode="ios" outline="true">
-        <ion-icon name="location-outline" color="primary"></ion-icon>
+        <ion-icon name="location-outline"></ion-icon>
         <ion-label>{{jobOffer.workPlace}}</ion-label>
       </ion-chip>
       <ion-chip color="primary" mode="ios" outline="true">
-        <ion-icon name="person-outline" color="primary"></ion-icon>
+        <ion-icon name="person-outline"></ion-icon>
         <ion-label>{{jobOffer.skills[0]}}</ion-label>
       </ion-chip>
       <ion-chip color="primary" mode="ios" outline="true">
-        <ion-icon name="time-outline" color="primary"></ion-icon>
+        <ion-icon name="time-outline"></ion-icon>
         <ion-label>{{jobOffer.jobType}}</ion-label>
       </ion-chip>
     </ion-row>
     <ion-row>
-      <ion-text>
+      <ion-text id="short-description">
         {{jobOffer.offerDescription}}
       </ion-text>
       <div class="details-div">

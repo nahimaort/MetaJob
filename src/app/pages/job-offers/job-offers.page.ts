@@ -10,6 +10,7 @@ import { getJobOffers } from 'src/app/services/firebase.service';
 export class JobOffersPage implements OnInit {
   profileImg: string = '../assets/images/profile-pic.jpeg';
   filters: string[] = ['All', 'Remote', 'Applied', 'Freshers', 'Fulltime', 'Partime'];
+  colors = ['#5424FD', '#F5001E', '#FFAC35'];
   selectedFilter: any;
   jobOffers: JobOffer[] = [];
 
@@ -22,7 +23,7 @@ export class JobOffersPage implements OnInit {
       if (res.exists()) {
         const data = res.val() as JobOffer;
         const jobOffersArray = Object.values(data);
-        
+
         jobOffersArray.forEach(jobOffer => {
           this.jobOffers.push({
             benefits: jobOffer.benefits,

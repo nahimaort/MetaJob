@@ -2,14 +2,26 @@ ion-card-content {
   padding-left: 0;
   padding-right: 0;
   padding-bottom: 0;
+  color: white;
 
   ion-chip {
     font-size: 13px;
+    color: white;
+    border-color: white;
 
     ion-icon {
       width: 15px;
+      color: white;
     }
   }
+}
+
+ion-card-title, ion-card-subtitle  {
+  color: white;
+}
+
+ion-card {
+  border-radius: 24px;
 }
 
 .details-div {
@@ -19,9 +31,9 @@ ion-card-content {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-left: 1em;
-  padding-right: 1em;
   align-items: center;
+  padding: 10px 1em;
+  margin-top: 15px;
 }
 
 .posted {
@@ -30,8 +42,28 @@ ion-card-content {
   justify-content: center;
   gap: 5px;
   display: flex;
+  font-weight: 500;
+
 }
 .wage {
   font-size: 18px;
   font-weight: 800;
+}
+
+#company-img {
+  height: 50px;
+  width: 50px;
+}
+
+#company-img-col {
+  margin-right: 10px;
+}
+
+#chips-container {
+  margin-bottom: 15px;
+  margin-left: 1em;
+}
+
+#short-description {
+  margin-left: 1.5em;
 }
