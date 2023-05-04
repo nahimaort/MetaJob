@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { JobOffer } from '../../models/JobOffer';
 import { getJobOfferImage } from '../../services/firebase.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-job-offers-card',
@@ -12,12 +13,16 @@ export class JobOffersCardComponent implements OnInit {
   @Input() color: string | undefined;
   jobOfferImage: any;
 
-  constructor() { }
+  constructor(private navCtrl: NavController) { }
 
   ngOnInit() {
     getJobOfferImage(this.jobOffer.imageCompany).then(res =>{
       this.jobOfferImage = res;
     })
+  }
+
+  navigateToDetails() {
+    this.navCtrl.navigateForward('/job-details', { state: { jobOffer: this.jobOffer } });
   }
 
 }

@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button slot="start">Back</ion-back-button>
+    <ion-title>Job Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-job-details-card [icon]="'pencil-outline'" [title]="'Job Description'" [description]="jobOffer?.offerDescription">
+  </app-job-details-card>
+  <app-job-details-card [icon]="'checkbox-outline'" [title]="'Skills & Requirements'" [description]="jobOffer?.skills">
+  </app-job-details-card>
+  <app-job-details-card [icon]="'person-outline'" [title]="'Your Role'" [description]="jobOffer?.roleDescription">
+  </app-job-details-card>
+
+  <div id="btn">
+    <ion-fab-button>
+      Apply now
+    </ion-fab-button>
+  </div>
+</ion-content>

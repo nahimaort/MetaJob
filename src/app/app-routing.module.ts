@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'job-offers',
     loadChildren: () => import('./pages/job-offers/job-offers.module').then( m => m.JobOffersPageModule)
+  },
+  {
+    path: 'job-details',
+    loadChildren: () => import('./pages/job-details/job-details.module').then( m => m.JobDetailsPageModule)
   }
 
 ];
