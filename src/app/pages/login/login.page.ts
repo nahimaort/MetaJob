@@ -25,6 +25,14 @@ export class LoginPage implements OnInit {
       getUserDataByUid(userId).then(userDetails =>{
         this.localStorage.setItem('userDetails', userDetails);
       })
+      const toast = await this.toastController.create({
+        message: 'You signed succesfully',
+        duration: 3000,
+        position: 'bottom',
+        color: 'success'
+      });
+      toast.present();
+      this.navCtrl.navigateForward('/job-offers')
 
     } catch (error) {
       console.error(error);
@@ -36,13 +44,5 @@ export class LoginPage implements OnInit {
       });
       toast.present();
     }
-    const toast = await this.toastController.create({
-      message: 'You signed succesfully',
-      duration: 3000,
-      position: 'bottom',
-      color: 'success'
-    });
-    toast.present();
-    this.navCtrl.navigateForward('/job-offers')
   }
 }
