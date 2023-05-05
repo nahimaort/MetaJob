@@ -22,31 +22,7 @@ export class JobOffersPage implements OnInit {
 
   ngOnInit() {
     this.selectedFilter = this.filters[0];
-    getJobOffers().then(res => {
-      if (res.exists()) {
-        const data = res.val() as JobOffer;
-        const jobOffersArray = Object.values(data);
-
-        jobOffersArray.forEach(jobOffer => {
-          this.allJobOffers.push({
-            benefits: jobOffer.benefits,
-            company: jobOffer.company,
-            date: jobOffer.date,
-            imageCompany: jobOffer.imageCompany,
-            jobType: jobOffer.jobType,
-            location: jobOffer.location,
-            offerDescription: jobOffer.offerDescription,
-            roleDescription: jobOffer.roleDescription,
-            salary: jobOffer.salary,
-            skills: jobOffer.skills,
-            title: jobOffer.title,
-            workPlace: jobOffer.workPlace,
-          } as JobOffer);
-        });
-      }
-    }).catch((error => {
-      console.error(error);
-    }));
+    this.getAllJobOffers();
 }
 
 
@@ -67,5 +43,34 @@ onFilterSelected(filter: string){
   }
 }
 
+getAllJobOffers(){
+  getJobOffers().then(res => {
+    if (res.exists()) {
+      const data = res.val() as JobOffer;
+      const jobOffersArray = Object.values(data);
+  
+      jobOffersArray.forEach(jobOffer => {
+        this.allJobOffers.push({
+          benefits: jobOffer.benefits,
+          company: jobOffer.company,
+          date: jobOffer.date,
+          imageCompany: jobOffer.imageCompany,
+          jobType: jobOffer.jobType,
+          location: jobOffer.location,
+          offerDescription: jobOffer.offerDescription,
+          roleDescription: jobOffer.roleDescription,
+          salary: jobOffer.salary,
+          skills: jobOffer.skills,
+          title: jobOffer.title,
+          workPlace: jobOffer.workPlace,
+        } as JobOffer);
 
+      this.jobOffers = this.allJobOffers.slice();
+      });
+    }
+  }).catch((error => {
+    console.error(error);
+  }));
+  
+}
 }
