@@ -21,6 +21,17 @@ export class JobOffersCardComponent implements OnInit {
     })
   }
 
+  getPostedDays() {
+    const today = new Date();
+    const postedDate = new Date(this.jobOffer.date);
+    const timeDiff = today.getTime() - postedDate.getTime();
+    const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+    if (daysDiff <= 0) {
+      return "Posted today";
+    }
+    return `Posted ${daysDiff} days ago`;
+  }
+
   navigateToDetails() {
     this.navCtrl.navigateForward('/job-details', { state: { jobOffer: this.jobOffer } });
   }

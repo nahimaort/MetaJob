@@ -11,7 +11,7 @@
     <h1>Find Jobs</h1>
   </ion-text>
   <div class="filters-container">
-    <ion-chip *ngFor="let filter of filters" [color]="selectedFilter === filter ? 'tertiary' : 'medium'" (click)="selectedFilter = filter">
+    <ion-chip *ngFor="let filter of filters" [color]="selectedFilter === filter ? 'tertiary' : 'medium'" (click)="onFilterSelected(filter)">
       <ion-label>{{ filter }}</ion-label>
     </ion-chip>
   </div>

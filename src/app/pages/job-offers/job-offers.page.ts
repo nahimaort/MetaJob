@@ -9,13 +9,16 @@ import { getJobOffers } from 'src/app/services/firebase.service';
 })
 export class JobOffersPage implements OnInit {
   profileImg: string = '../assets/images/profile-pic.jpeg';
-  filters: string[] = ['All', 'Remote', 'Applied', 'Freshers', 'Fulltime', 'Partime'];
+  filters: string[] = ['All', 'Remote', 'Applied', 'Freshers', 'Full-time', 'Part-time'];
   colors = ['#5424FD', '#F5001E', '#FFAC35'];
   selectedFilter: any;
-  jobOffers: JobOffer[] = [];
+  allJobOffers: JobOffer[] = [];
+  filteredJobOffers: JobOffer[] = [];
+  jobOffers: JobOffer[] =  [];
 
 
-  constructor() { }
+  constructor() {}
+
 
   ngOnInit() {
     this.selectedFilter = this.filters[0];
@@ -25,7 +28,7 @@ export class JobOffersPage implements OnInit {
         const jobOffersArray = Object.values(data);
 
         jobOffersArray.forEach(jobOffer => {
-          this.jobOffers.push({
+          this.allJobOffers.push({
             benefits: jobOffer.benefits,
             company: jobOffer.company,
             date: jobOffer.date,
@@ -44,7 +47,25 @@ export class JobOffersPage implements OnInit {
     }).catch((error => {
       console.error(error);
     }));
-
 }
+
+
+onFilterSelected(filter: string){
+  this.selectedFilter = filter
+
+  if (filter === 'All') {
+    this.jobOffers = this.allJobOffers.slice();
+
+  } else {
+    this.filteredJobOffers.splice(0, this.filteredJobOffers.length);
+
+    this.allJobOffers.filter(jobOffer => {
+      if(jobOffer.jobType === this.selectedFilter)
+        this.filteredJobOffers.push(jobOffer);
+    });
+    this.jobOffers = this.filteredJobOffers.slice();
+  }
+}
+
 
 }
