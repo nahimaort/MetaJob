@@ -12,12 +12,14 @@ export class JobOffersCardComponent implements OnInit {
   @Input() jobOffer: JobOffer = {} as JobOffer
   @Input() color: string | undefined;
   jobOfferImage: any;
+  imageLoaded = false;
 
   constructor(private navCtrl: NavController) { }
 
   ngOnInit() {
     getJobOfferImage(this.jobOffer.imageCompany).then(res =>{
       this.jobOfferImage = res;
+      this.imageLoaded = true;
     })
   }
 

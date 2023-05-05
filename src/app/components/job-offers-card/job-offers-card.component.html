@@ -3,7 +3,14 @@
 
     <ion-row>
       <ion-col size="2" id="company-img-col">
-        <ion-img [src]=jobOfferImage id="company-img"></ion-img>
+        <div *ngIf="imageLoaded; else noImage">
+          <ion-img [src]=jobOfferImage id="company-img"></ion-img>
+        </div>
+
+        <ng-template #noImage>
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ng-template>
+
       </ion-col>
       <ion-col>
         <ion-card-subtitle>{{jobOffer.company}}</ion-card-subtitle>
@@ -33,7 +40,7 @@
       <div class="details-div">
         <div class="posted">
           <ion-icon name="time-outline"></ion-icon>
-          <ion-text>{{getPostedDays()}}</ion-text>
+          <ion-text>Posted {{getPostedDays()}} days ago</ion-text>
         </div>
         <ion-text class="wage">{{jobOffer.salary}}</ion-text>
       </div>
