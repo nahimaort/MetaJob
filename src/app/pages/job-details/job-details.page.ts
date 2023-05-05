@@ -9,15 +9,19 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class JobDetailsPage implements OnInit {
   jobOffer: JobOffer | undefined;
-
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  userDetails: any;
+  constructor(private route: ActivatedRoute, private router: Router) {
+   
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation()?.extras.state) {
         this.jobOffer = this.router.getCurrentNavigation()?.extras.state?.['jobOffer'];
       }
+    
     });
+
   }
 
 }
