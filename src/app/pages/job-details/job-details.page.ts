@@ -19,6 +19,7 @@ export class JobDetailsPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation()?.extras.state) {
         this.jobOffer = this.router.getCurrentNavigation()?.extras.state?.['jobOffer'];
+        this.color = this.router.getCurrentNavigation()?.extras.state?.['color'];
       }
 
     });
