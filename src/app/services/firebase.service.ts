@@ -38,7 +38,7 @@ export async function getUserDataByUid(uid:string){
   }
 }
 
-export async function getJobOfferImage(image:string){
+export async function getImage(image:string){
   const imageRef = storageRef(storage, image);
   const url = await getDownloadURL(imageRef);
   return url;

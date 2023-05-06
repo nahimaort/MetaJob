@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JobOffer } from 'src/app/models/JobOffer';
-import { getJobOffers } from 'src/app/services/firebase.service';
+import { getJobOffers, getImage } from 'src/app/services/firebase.service';
 import { LocalStorage } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { LocalStorage } from 'src/app/services/local-storage.service';
   styleUrls: ['./job-offers.page.scss'],
 })
 export class JobOffersPage implements OnInit {
-  profileImg: string = '../assets/images/profile-pic.jpeg';
+  profileImg: string = '';
   filters: string[] = ['All', 'Remote', 'Applied', 'Freshers', 'Full-time', 'Part-time'];
   colors = ['#5424FD', '#F5001E', '#FFAC35'];
   selectedFilter: any;
@@ -17,7 +17,6 @@ export class JobOffersPage implements OnInit {
   filteredJobOffers: JobOffer[] = [];
   jobOffers: JobOffer[] =  [];
   userDetails: any;
-
 
   constructor(private localStorage: LocalStorage) {}
 
@@ -78,6 +77,12 @@ export class JobOffersPage implements OnInit {
 
   ionViewDidEnter(){
     this.userDetails = this.localStorage.getItem('userDetails')
-    console.log(this.userDetails)
+    this.getProfileImage()
+  }
+
+  getProfileImage(){
+    getImage(this.userDetails.profileImage).then(profileImage => {
+      this.profileImg = profileImage
+    })
   }
 }
