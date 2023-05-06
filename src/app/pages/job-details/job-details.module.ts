@@ -8,6 +8,7 @@ import { JobDetailsPageRoutingModule } from './job-details-routing.module';
 
 import { JobDetailsPage } from './job-details.page';
 import {JobDetailsCardComponent} from "../../components/job-details-card/job-details-card.component";
+import {JobOffersShortCardComponent} from "../../components/job-offers-short-card/job-offers-short-card.component";
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import {JobDetailsCardComponent} from "../../components/job-details-card/job-det
     IonicModule,
     JobDetailsPageRoutingModule
   ],
-    declarations: [JobDetailsPage, JobDetailsCardComponent]
+    declarations: [JobDetailsPage, JobDetailsCardComponent, JobOffersShortCardComponent]
 })
 export class JobDetailsPageModule {}
