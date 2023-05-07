@@ -71,11 +71,11 @@ export class CompanyJobOffersPage implements OnInit {
           workPlace: jobOffer.workPlace,
         } as JobOffer);
       });
-      
+
     }).catch((error => {
       console.error(error);
     }));
-    
+
   }
 
   getProfileImage(){
@@ -85,7 +85,7 @@ export class CompanyJobOffersPage implements OnInit {
   }
 
   addJobOffer(){
-    this.navCtrl.navigateForward('/') //Add the destination path to form
+    this.navCtrl.navigateForward('/add-job');
   }
 
 }

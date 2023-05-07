@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button slot="start">Back</ion-back-button>
+    <ion-title>Add new job</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="inputs">
+    <div class="input">
+      <ion-label>Job position</ion-label>
+      <ion-input type="text" placeholder=" Enter job title" class="my-input">
+      </ion-input>
+    </div>
+
+    <div class="input">
+      <ion-label>Type of workplace</ion-label>
+      <ion-select placeholder=" Select type" class="my-input">
+        <ion-select-option>On-site</ion-select-option>
+        <ion-select-option>Hybrid</ion-select-option>
+        <ion-select-option>Remote</ion-select-option>
+      </ion-select>
+    </div>
+
+    <div class="input">
+      <ion-label>Job location</ion-label>
+      <ion-input type="text" placeholder=" Enter location" class="my-input">
+      </ion-input>
+    </div>
+
+    <div class="input">
+      <ion-label>Company</ion-label>
+      <ion-input type="text" placeholder=" Enter company" class="my-input">
+      </ion-input>
+    </div>
+
+    <div class="input">
+      <ion-label>Job type</ion-label>
+      <ion-select placeholder=" Select type" class="my-input">
+        <ion-select-option>Full-time</ion-select-option>
+        <ion-select-option>Part time</ion-select-option>
+        <ion-select-option>Contract</ion-select-option>
+        <ion-select-option>Temporary</ion-select-option>
+        <ion-select-option>Volunteer</ion-select-option>
+        <ion-select-option>Internship</ion-select-option>
+      </ion-select>
+    </div>
+
+    <div class="input">
+      <ion-label>Experience</ion-label>
+      <ion-input type="text" placeholder=" Enter required experience" class="my-input">
+      </ion-input>
+    </div>
+
+    <div class="input">
+      <ion-label>Description</ion-label>
+      <ion-textarea type="text" placeholder=" Write description..." class="my-input textearea">
+      </ion-textarea>
+    </div>
+
+    <div class="input">
+      <ion-label>Skills and requirements</ion-label>
+      <ion-textarea type="text" placeholder=" Write skills and requirements..." class="my-input textearea">
+      </ion-textarea>
+    </div>
+
+    <div class="input">
+      <ion-label>Role</ion-label>
+      <ion-textarea type="text" placeholder=" Write about the role..." class="my-input textearea">
+      </ion-textarea>
+    </div>
+
+    <ion-button>Post</ion-button>
+  </div>
+
+
+
+</ion-content>
