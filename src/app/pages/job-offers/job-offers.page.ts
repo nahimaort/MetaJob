@@ -23,7 +23,9 @@ export class JobOffersPage implements OnInit {
 
   ngOnInit() {
     this.selectedFilter = this.filters[0];
+    this.userDetails = this.localStorage.getItem('userDetails')
     this.getAllJobOffers();
+    this.getProfileImage()
   }
 
 
@@ -73,11 +75,6 @@ export class JobOffersPage implements OnInit {
       console.error(error);
     }));
     
-  }
-
-  ionViewDidEnter(){
-    this.userDetails = this.localStorage.getItem('userDetails')
-    this.getProfileImage()
   }
 
   getProfileImage(){

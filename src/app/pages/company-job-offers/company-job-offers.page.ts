@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { JobOffer } from 'src/app/models/JobOffer';
 import { getJobOffersByCompany, getImage } from 'src/app/services/firebase.service';
 import { LocalStorage } from 'src/app/services/local-storage.service';
@@ -20,7 +21,7 @@ export class CompanyJobOffersPage implements OnInit {
   userDetails: any;
   userId: any;
 
-  constructor(private localStorage: LocalStorage) {}
+  constructor(private localStorage: LocalStorage, private navCtrl: NavController) {}
 
 
   ngOnInit() {
@@ -84,7 +85,7 @@ export class CompanyJobOffersPage implements OnInit {
   }
 
   addJobOffer(){
-    
+    this.navCtrl.navigateForward('/') //Add the destination path to form
   }
 
 }
