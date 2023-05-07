@@ -40,33 +40,8 @@ export class AddJobPage implements OnInit {
     skills: [],
     title: '',
     workPlace: '',
+    key: ''
   };
-
-  async addJobOffer() {
-    this.fillJobOfferData();
-
-    try {
-      await this.firebaseService.addJobOffer(this.userId, this.jobOffer);
-      const toast = await this.toastController.create({
-        message: 'Offer added successfully',
-        duration: 3000,
-        position: 'bottom',
-        color: 'success'
-      });
-      toast.present();
-
-    } catch (error) {
-      const toast = await this.toastController.create({
-        message: 'An error occurred while adding the offer. Please try again later.',
-        duration: 3000,
-        position: 'bottom',
-        color: 'danger'
-      });
-      toast.present();
-    }
-
-    this.navCtrl.navigateForward('/company-job-offers')
-  }
 
   getDate(){
     const today = new Date();
@@ -95,6 +70,32 @@ export class AddJobPage implements OnInit {
     this.jobOffer.jobType = this.jobType.value;
     this.jobOffer.workPlace = this.workplace.value;
     this.jobOffer.skills = this.skills?.value?.split('\n') ?? [];
+  }
+
+  async addJobOffer() {
+    this.fillJobOfferData();
+
+    try {
+      await this.firebaseService.addJobOffer(this.userId, this.jobOffer);
+      const toast = await this.toastController.create({
+        message: 'Offer added successfully',
+        duration: 3000,
+        position: 'bottom',
+        color: 'success'
+      });
+      toast.present();
+
+    } catch (error) {
+      const toast = await this.toastController.create({
+        message: 'An error occurred while adding the offer. Please try again later.',
+        duration: 3000,
+        position: 'bottom',
+        color: 'danger'
+      });
+      toast.present();
+    }
+
+    this.navCtrl.navigateForward('/company-job-offers')
   }
 
 }

@@ -11,7 +11,7 @@ import { LocalStorage } from 'src/app/services/local-storage.service';
 })
 export class JobOffersPage implements OnInit {
   profileImg: string = '';
-  filters: string[] = ['All','Full-time', 'Part-time', 'Internship', 'Freshers', 'Contrat', 'Temporary', 'Volunteer'];
+  filters: string[] = ['All','Full-time', 'Part-time', 'Internship', 'Freshers', 'Contract', 'Temporary', 'Volunteer'];
   colors = ['#5424FD', '#F5001E', '#FFAC35'];
   selectedFilter: any;
   allJobOffers: JobOffer[] = [];

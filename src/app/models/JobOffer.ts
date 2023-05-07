@@ -10,4 +10,5 @@ export interface JobOffer {
     skills: string[];
     title: string;
     workPlace: string;
+    key: string;
   }

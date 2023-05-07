@@ -7,37 +7,45 @@
 
 <ion-content [fullscreen]="true">
   <div class="inputs">
-    <div class="input">
-      <ion-label>Full name</ion-label>
-      <ion-input type="text" placeholder=" Enter your full name" class="my-input" [(ngModel)]="fullname">
-      </ion-input>
-    </div>
 
     <div class="input">
       <ion-label>Website, blog, or portfolio</ion-label>
-      <ion-input type="text" placeholder=" Enter your website" class="my-input" [(ngModel)]="link">
+      <ion-input type="text" placeholder=" Enter your website" class="my-input" #link>
       </ion-input>
     </div>
 
-    <div class="input">
-      <ion-label>Upload CV</ion-label>
-      <div class="upload-container">
-        <div class="upload-input-container my-input">
-          <ion-icon name="cloud-upload-outline" class="upload-icon"></ion-icon>
-          <ion-label class="upload-text">Format DOC, PDF, JPG</ion-label>
-          <ion-label class="browse-text">Browse files</ion-label>
-          <ion-input type="file" class="upload-input" [(ngModel)]="cv"></ion-input>
+    <ng-container *ngIf="!cvUrl">
+      <div class="input">
+        <ion-label>Upload CV</ion-label>
+        <div class="upload-container">
+          <div class="upload-input-container my-input">
+            <ion-icon name="cloud-upload-outline" class="upload-icon"></ion-icon>
+            <ion-label class="upload-text">Format DOC, PDF, JPG</ion-label>
+            <ion-label class="browse-text">Browse files</ion-label>
+            <input type="file" class="upload-input" (change)="onFileSelected($event)">
+          </div>
         </div>
       </div>
-    </div>
+    </ng-container>
+    <ng-container *ngIf="cvUrl">
+      <div class="input">
+        <ion-label>Upload CV</ion-label>
+        <div class="upload-container">
+          <div class="upload-input-container my-input">
+            <ion-icon name="document" class="upload-icon"></ion-icon>
+            <ion-label class="upload-text">Your CV was uploaded</ion-label>
+          </div>
+        </div>
+      </div>
+    </ng-container>
 
     <div class="input">
       <ion-label>Cover letter</ion-label>
-      <ion-textarea type="text" placeholder=" Write something..." class="my-input cover-letter" [(ngModel)]="coverletter">
+      <ion-textarea type="text" placeholder=" Write something..." class="my-input cover-letter" #coverletter>
       </ion-textarea>
     </div>
 
-    <ion-button>Apply now</ion-button>
+    <ion-button (click)="applyForJob()">Apply now</ion-button>
   </div>
 
 

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { getDatabase, ref, get, query, equalTo, child, orderByChild, orderByKey, push, set } from 'firebase/database';
+import { getDatabase, ref, get, push, set } from 'firebase/database';
 import { environment } from 'src/environments/environment';
-import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
+import { getStorage, ref as storageRef, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
 import initializeApp = firebase.initializeApp;
 import { JobOffer } from '../models/JobOffer';
+import { JobApplication } from '../models/JobApplication';
 
 
 const app = initializeApp(environment.firebaseConfig);
@@ -26,7 +27,9 @@ export class FirebaseService {
     const jobOffers: JobOffer[] = [];
     snapshot.forEach((companySnapshot) => {
       companySnapshot.forEach((jobOfferSnapshot) => {
-        jobOffers.push(jobOfferSnapshot.val());
+        const jobOffer = jobOfferSnapshot.val();
+        const key = jobOfferSnapshot.key;
+        jobOffers.push(Object.assign({}, jobOffer, { key }));
       });
     });
     return jobOffers;
@@ -37,8 +40,8 @@ export class FirebaseService {
     const snapshot = await get(userRef);
   
     if (snapshot.exists()) {
-      const { isCompany, name, profileImage } = snapshot.val();
-      return { isCompany, name, profileImage };
+      const userData = snapshot.val();
+      return userData;
     } else {
       return null;
     }
@@ -83,7 +86,18 @@ export class FirebaseService {
     await set(newJobOfferRef, jobOffer);
   }
 
+  async uploadCv(file: File, userId: string) {
+    const cvRef = storageRef(storage, `UserCVS/${userId}/${file.name}`);
+    await uploadBytes(cvRef, file);
+    return await getDownloadURL(cvRef);
+  }
 
+  async addJobOApplication(jobOfferId: string, userId: string, jobApplication: JobApplication) {
+    console.log(jobOfferId, userId, jobApplication);
+    const jobApplicationRef = ref(db, `JobApplications/${jobOfferId}/${userId}`);
+    const newJobOfferRef = push(jobApplicationRef);
+    return await set(newJobOfferRef, jobApplication);
+  }
 }
 
 

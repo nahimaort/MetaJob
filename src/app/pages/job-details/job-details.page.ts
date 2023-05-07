@@ -11,6 +11,7 @@ export class JobDetailsPage implements OnInit {
   jobOffer: JobOffer = {} as JobOffer
   userDetails: any;
   color: string | undefined;
+
   constructor(private route: ActivatedRoute, private router: Router) {
 
   }
@@ -21,12 +22,10 @@ export class JobDetailsPage implements OnInit {
         this.jobOffer = this.router.getCurrentNavigation()?.extras.state?.['jobOffer'];
         this.color = this.router.getCurrentNavigation()?.extras.state?.['color'];
       }
-
     });
-
   }
 
   goToApplyJob() {
-    this.router.navigate(['apply-job']);
+    this.router.navigate(['apply-job'],{queryParams: { jobKey: this.jobOffer.key}});
   }
 }
