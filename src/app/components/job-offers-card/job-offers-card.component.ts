@@ -35,7 +35,7 @@ export class JobOffersCardComponent implements OnInit {
   }
 
   navigateToDetails() {
-    this.navCtrl.navigateForward('/job-details', { state: { jobOffer: this.jobOffer } });
+    this.navCtrl.navigateForward('/job-details', { state: { jobOffer: this.jobOffer, color: this.color } });
   }
 
 }
