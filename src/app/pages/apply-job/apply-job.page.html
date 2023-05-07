@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button slot="start">Back</ion-back-button>
+    <ion-title>Apply Job</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="inputs">
+    <div class="input">
+      <ion-label>Full name</ion-label>
+      <ion-input type="text" placeholder=" Enter your full name" class="my-input">
+      </ion-input>
+    </div>
+
+    <div class="input">
+      <ion-label>Website, blog, or portfolio</ion-label>
+      <ion-input type="text" placeholder=" Enter your website" class="my-input">
+      </ion-input>
+    </div>
+
+    <div class="input">
+      <ion-label>Upload CV</ion-label>
+      <div class="upload-container">
+        <div class="upload-input-container my-input">
+          <ion-icon name="cloud-upload-outline" class="upload-icon"></ion-icon>
+          <ion-label class="upload-text">Format DOC, PDF, JPG</ion-label>
+          <ion-label class="browse-text">Browse files</ion-label>
+          <ion-input type="file" class="upload-input"></ion-input>
+        </div>
+      </div>
+    </div>
+
+    <div class="input">
+      <ion-label>Cover letter</ion-label>
+      <ion-textarea type="text" placeholder=" Write something..." class="my-input cover-letter">
+      </ion-textarea>
+    </div>
+
+    <ion-button>Apply now</ion-button>
+  </div>
+
+
+
+</ion-content>

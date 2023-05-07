@@ -28,8 +28,11 @@ const routes: Routes = [
   {
     path: 'company-job-offers',
     loadChildren: () => import('./pages/company-job-offers/company-job-offers.module').then( m => m.CompanyJobOffersPageModule)
+  },
+  {
+    path: 'apply-job',
+    loadChildren: () => import('./pages/apply-job/apply-job.module').then( m => m.ApplyJobPageModule)
   }
-
 
 
 ];

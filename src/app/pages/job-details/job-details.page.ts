@@ -26,4 +26,7 @@ export class JobDetailsPage implements OnInit {
 
   }
 
+  goToApplyJob() {
+    this.router.navigate(['apply-job']);
+  }
 }
