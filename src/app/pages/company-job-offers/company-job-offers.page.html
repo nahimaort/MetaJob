@@ -1,16 +1,28 @@
 <ion-content [fullscreen]="true" class="ion-align-items-center">
   <div class="greetings-container">
     <ion-text class="greetings">
-      Hello {{userDetails?.name}} 👋
+      Hello {{userDetails?.name}} ✅
     </ion-text>
     <ion-avatar>
       <img [src]="profileImg" />
     </ion-avatar>
   </div>
-  <ion-text>
-    <h1>Your job offers</h1>
-    <ion-button (click)="addJobOffer()">Add Offer</ion-button>
-  </ion-text>
+  <ion-row>
+    <ion-col>
+      <ion-text>
+        <h1>Your job offers</h1>
+      </ion-text>
+    </ion-col>
+    <ion-col size="2" class="fab-container">
+      <ion-fab>
+        <ion-fab-button (click)="addJobOffer()">
+          <ion-icon name="add" ></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ion-col>
+
+  </ion-row>
+
   <div class="filters-container">
     <ion-chip *ngFor="let filter of filters" [color]="selectedFilter === filter ? 'tertiary' : 'medium'">
       <ion-label>{{ filter }}</ion-label>

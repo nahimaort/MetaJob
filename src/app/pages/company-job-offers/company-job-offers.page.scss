@@ -1,0 +1,49 @@
+ion-avatar {
+  height: 32px;
+  width: 32px;
+}
+
+.greetings {
+  font-family: 'Roboto';
+  font-size: 20px;
+}
+
+.greetings-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  margin-top: 2em;
+}
+
+ion-text {
+
+  h1 {
+    font-family: 'Roboto';
+    font-size: 30px;
+    padding-left: 0.75em;
+  }
+}
+
+.filters-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-left: 0.75em;
+}
+
+.filters-container::-webkit-scrollbar {
+  display: none;
+}
+
+ion-fab-button {
+  width: 50px;
+  height: 50px;
+}
+
+.fab-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1em;
+}
