@@ -40,6 +40,10 @@ const routes: Routes = [
   {
     path: 'applicants',
     loadChildren: () => import('./pages/applicants/applicants.module').then( m => m.ApplicantsPageModule)
+  },
+  {
+    path: 'application',
+    loadChildren: () => import('./pages/application/application.module').then( m => m.ApplicationPageModule)
   }
 
 
