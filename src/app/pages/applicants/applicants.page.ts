@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import { stat } from 'fs';
 import { JobApplication } from 'src/app/models/JobApplication';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -25,8 +24,6 @@ export class ApplicantsPage implements OnInit {
     });
 
     this.getAllJobOffers();
-    console.log(this.jobApplications)
-    
   }
 
 
@@ -49,10 +46,9 @@ export class ApplicantsPage implements OnInit {
     })
   }
   
-  
-
-  goToApplication() {
-    this.router.navigate(['/application']);
+  goToApplication(jobApplication: any) {
+    const applicationJson = JSON.stringify(jobApplication);
+    this.router.navigate(['/application'],{queryParams: { application: applicationJson}});
   }
 
 }

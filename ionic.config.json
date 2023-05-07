@@ -1,7 +1,8 @@
 {
   "name": "MetaJob",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

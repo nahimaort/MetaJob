@@ -7,7 +7,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item *ngFor="let jobApplication of jobApplications; let i = index" (click)="goToApplication()">
+    <ion-item *ngFor="let jobApplication of jobApplications; let i = index" (click)="goToApplication(jobApplication)">
       <ion-row>
         <ion-col size="2">
           <div *ngIf="imageLoaded; else noImage">

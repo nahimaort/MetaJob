@@ -9,36 +9,34 @@
 <ion-content [fullscreen]="true" class="container">
   <div class="content">
     <ion-text class="title">Full name</ion-text>
-    <ion-text>Simon Teodor Rusu Stratulat</ion-text>
+    <ion-text>{{dataAplication.fullname}}</ion-text>
   </div>
   <div class="content">
     <ion-text class="title">Website, blog, or portfolio</ion-text>
-    <ion-text>simon@simon.com</ion-text>
+    <ion-text>{{dataAplication.link}}</ion-text>
   </div>
-  <div class="content" (click)="openWebsite()">
+  <div class="content" (click)="showPdfViewer()">
     <ion-text class="title">CV</ion-text>
     <ion-row>
       <ion-col size="2">
         <img [src]="cvImg" />
       </ion-col>
       <ion-col>
+        <ngx-extended-pdf-viewer *ngIf="isPdfViewerVisible" [src]="dataAplication.cv" [useBrowserLocale]="true" height="120vh">
+        </ngx-extended-pdf-viewer>
         <ion-row>
-          <ion-text>Simon Rusu - CV - Developer</ion-text>
+          <ion-text>{{dataAplication.fullname}} - CV - Application</ion-text>
         </ion-row>
         <ion-row>
-          <ion-text><ion-text>951 Kb · 25 Apr 2023 at 11:30 am</ion-text></ion-text>
+          <ion-text><ion-text>951 Kb · 06 May 2023 at 11:30 am</ion-text></ion-text>
         </ion-row>
-
-
       </ion-col>
     </ion-row>
-
 
   </div>
   <div class="content">
     <ion-text class="title">Cover letter</ion-text>
-    <ion-text>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-    </ion-text>
+    <ion-text>{{dataAplication.coverletter}}</ion-text>
   </div>
 
   <div class="button-container">

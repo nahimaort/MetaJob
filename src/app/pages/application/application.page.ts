@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-application',
@@ -6,15 +7,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./application.page.scss'],
 })
 export class ApplicationPage implements OnInit {
-  private websiteUrl: string = 'https://ionicframework.com/docs/api/fab';
-  cvImg: any = './assets/images/PDF.png';
 
-  constructor() { }
+  cvImg: any = './assets/images/PDF.png';
+  dataAplication: any;
+  isPdfViewerVisible = false;
+  
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.route.queryParams.subscribe(params => {
+      const plainData = params['application'];
+      this.dataAplication = JSON.parse(plainData);
+      console.log(this.dataAplication)
+    });
+
   }
 
-  openWebsite() {
-    window.open(this.websiteUrl, '_blank');
+
+  showPdfViewer() {
+    this.isPdfViewerVisible = true;
   }
 }
