@@ -38,6 +38,6 @@
       <ion-label>{{ filter }}</ion-label>
     </ion-chip>
   </div>
-  <app-job-offers-card *ngFor="let companyJobOffer of companyJobOffers; let i = index" [jobOffer]="companyJobOffer" [color]="colors[i % colors.length]">
+  <app-job-offers-card *ngFor="let companyJobOffer of companyJobOffers; let i = index" [jobOffer]="companyJobOffer" [color]="colors[i % colors.length]" [company]="true">
   </app-job-offers-card>
 </ion-content>

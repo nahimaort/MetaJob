@@ -11,6 +11,7 @@ import { NavController } from '@ionic/angular';
 export class JobOffersCardComponent implements OnInit {
   @Input() jobOffer: JobOffer = {} as JobOffer
   @Input() color: string | undefined;
+  @Input() company: boolean | undefined;
   jobOfferImage: any;
   imageLoaded = false;
 
@@ -35,7 +36,12 @@ export class JobOffersCardComponent implements OnInit {
   }
 
   navigateToDetails() {
-    this.navCtrl.navigateForward('/job-details', { state: { jobOffer: this.jobOffer, color: this.color } });
+    if (this.company) {
+      this.navCtrl.navigateForward('/applicants');
+    }
+    else {
+      this.navCtrl.navigateForward('/job-details', { state: { jobOffer: this.jobOffer, color: this.color } });
+    }
   }
 
 }
