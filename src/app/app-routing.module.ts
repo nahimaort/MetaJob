@@ -36,6 +36,10 @@ const routes: Routes = [
   {
     path: 'add-job',
     loadChildren: () => import('./pages/add-job/add-job.module').then( m => m.AddJobPageModule)
+  },
+  {
+    path: 'applicants',
+    loadChildren: () => import('./pages/applicants/applicants.module').then( m => m.ApplicantsPageModule)
   }
 
 
