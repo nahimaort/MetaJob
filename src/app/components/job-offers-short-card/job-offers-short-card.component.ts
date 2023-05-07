@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {JobOffer} from "../../models/JobOffer";
-import {getJobOfferImage} from "../../services/firebase.service";
+import {getImage} from "../../services/firebase.service";
 
 @Component({
   selector: 'app-job-offers-short-card',
@@ -15,7 +15,7 @@ export class JobOffersShortCardComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    getJobOfferImage(this.jobOffer.imageCompany).then(res =>{
+    getImage(this.jobOffer.imageCompany).then(res =>{
       this.jobOfferImage = res;
     })
   }
