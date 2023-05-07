@@ -13,6 +13,22 @@ import { JobOffer } from '../models/JobOffer';
 export class FirebaseService {
 
   constructor() { }
+
+   async getJobOffersByCompany(companyId: string) {
+    const jobOffersRef = ref(db, `JobOffers/${companyId}`);
+    const snapshot = await get(jobOffersRef);
+    const jobOffers: JobOffer[] = [];
+    snapshot.forEach((childSnapshot) => {
+      jobOffers.push(childSnapshot.val());
+    });
+    return jobOffers;
+  }
+
+  async addJobOffer(userId: string, jobOffer: JobOffer) {
+    const jobOfferRef = ref(db, `JobOffers/${userId}`);
+    const newJobOfferRef = push(jobOfferRef);
+    await set(newJobOfferRef, jobOffer);
+  }
 }
 
 const app = initializeApp(environment.firebaseConfig);
@@ -25,20 +41,6 @@ const jobOfferCollection = ref(db, 'JobOffers');
 
 export async function getJobOffers(){
   return get(jobOfferCollection);
-}
-
-export async function getJobOffersByCompany(companyId: string) {
-  const jobOffersQuery = query(
-    jobOfferCollection,
-    orderByKey(),
-    equalTo(companyId)
-  );
-  const snapshot = await get(jobOffersQuery);
-  const jobOffers: JobOffer[] = [];
-  snapshot.forEach((child) => {
-    jobOffers.push({ ...child.val() });
-  });
-  return jobOffers;
 }
 
 export async function getUserDataByUid(uid:string){
@@ -72,11 +74,6 @@ export function userLogin(email: string, password: string): Promise<string> {
   });
 }
 
-export async function addJobOffer(userId: string, jobOffer: JobOffer) {
-    const jobOfferRef = ref(db, `JobOffers/${userId}`);
-    const newJobOfferRef = push(jobOfferRef);
-    await set(newJobOfferRef, jobOffer);
-}
 
 
 

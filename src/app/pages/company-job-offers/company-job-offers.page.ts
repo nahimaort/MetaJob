@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { JobOffer } from 'src/app/models/JobOffer';
-import { getJobOffersByCompany, getImage } from 'src/app/services/firebase.service';
+import { getImage, FirebaseService } from 'src/app/services/firebase.service';
 import { LocalStorage } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class CompanyJobOffersPage implements OnInit {
   userDetails: any;
   userId: any;
 
-  constructor(private localStorage: LocalStorage, private navCtrl: NavController) {}
+  constructor(private localStorage: LocalStorage, private navCtrl: NavController, private firebaseService: FirebaseService) {}
 
 
   ngOnInit() {
@@ -29,6 +29,9 @@ export class CompanyJobOffersPage implements OnInit {
     this.userId = this.localStorage.getItem('userId')
     this.userDetails = this.localStorage.getItem('userDetails')
     this.getProfileImage()
+  }
+
+  ionViewWillEnter(){
     this.getAllJobOffers();
   }
 
@@ -51,31 +54,13 @@ export class CompanyJobOffersPage implements OnInit {
   }*/
 
   getAllJobOffers(){
-    getJobOffersByCompany(this.userId).then(jobOffers => {
-
-      const jobOffersArray = Object.values(jobOffers);
-
-      jobOffersArray.forEach(jobOffer => {
-        this.allJobOffers.push({
-          benefits: jobOffer.benefits,
-          company: jobOffer.company,
-          date: jobOffer.date,
-          imageCompany: jobOffer.imageCompany,
-          jobType: jobOffer.jobType,
-          location: jobOffer.location,
-          offerDescription: jobOffer.offerDescription,
-          roleDescription: jobOffer.roleDescription,
-          salary: jobOffer.salary,
-          skills: jobOffer.skills,
-          title: jobOffer.title,
-          workPlace: jobOffer.workPlace,
-        } as JobOffer);
-      });
+    console.log(this.userId)
+    this.firebaseService.getJobOffersByCompany(this.userId).then( jobOffers =>{
+      this.companyJobOffers = Object.values(jobOffers);
 
     }).catch((error => {
       console.error(error);
     }));
-
   }
 
   getProfileImage(){

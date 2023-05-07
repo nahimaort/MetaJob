@@ -1,5 +1,4 @@
 export interface JobOffer {
-    benefits: string;
     company: string;
     date: string;
     imageCompany: string;

@@ -54,7 +54,6 @@ export class JobOffersPage implements OnInit {
     
         jobOffersArray.forEach(jobOffer => {
           this.allJobOffers.push({
-            benefits: jobOffer.benefits,
             company: jobOffer.company,
             date: jobOffer.date,
             imageCompany: jobOffer.imageCompany,

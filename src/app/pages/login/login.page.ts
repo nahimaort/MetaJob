@@ -33,7 +33,6 @@ export class LoginPage implements OnInit {
         color: 'success'
       });
       toast.present();
-      
       const isCompany = this.localStorage.getItem('userDetails').isCompany
 
       if(isCompany == true)
