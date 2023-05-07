@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getUserDataByUid, userLogin } from 'src/app/services/firebase.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
 import { NavController, ToastController } from '@ionic/angular';
 import { LocalStorage } from 'src/app/services/local-storage.service';
 
@@ -13,16 +13,16 @@ export class LoginPage implements OnInit {
   email:string="";
   password:string=""
 
-  constructor(private toastController: ToastController, private navCtrl: NavController, private localStorage: LocalStorage) { }
+  constructor(private toastController: ToastController, private navCtrl: NavController, private localStorage: LocalStorage, private firebaseService: FirebaseService) { }
 
   ngOnInit() {
   }
 
   async login() {
     try {
-      const userId = await userLogin(this.email, this.password);
+      const userId = await this.firebaseService.userLogin(this.email, this.password);
 
-      getUserDataByUid(userId).then(userDetails =>{
+      this.firebaseService.getUserDataByUid(userId).then(userDetails =>{
         this.localStorage.setItem('userId', userId);
         this.localStorage.setItem('userDetails', userDetails);
       })

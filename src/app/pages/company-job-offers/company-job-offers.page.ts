@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { JobOffer } from 'src/app/models/JobOffer';
-import { getImage, FirebaseService } from 'src/app/services/firebase.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
 import { LocalStorage } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -32,7 +32,7 @@ export class CompanyJobOffersPage implements OnInit {
   }
 
   ionViewWillEnter(){
-    this.getAllJobOffers();
+    this.getCompanyJobOffers();
   }
 
 
@@ -53,8 +53,7 @@ export class CompanyJobOffersPage implements OnInit {
     }
   }*/
 
-  getAllJobOffers(){
-    console.log(this.userId)
+  getCompanyJobOffers(){
     this.firebaseService.getJobOffersByCompany(this.userId).then( jobOffers =>{
       this.companyJobOffers = Object.values(jobOffers);
 
@@ -64,7 +63,7 @@ export class CompanyJobOffersPage implements OnInit {
   }
 
   getProfileImage(){
-    getImage(this.userDetails.profileImage).then(profileImage => {
+    this.firebaseService.getImage(this.userDetails.profileImage).then(profileImage => {
       this.profileImg = profileImage
     })
   }

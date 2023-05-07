@@ -7,12 +7,61 @@ import firebase from 'firebase/compat/app';
 import initializeApp = firebase.initializeApp;
 import { JobOffer } from '../models/JobOffer';
 
+
+const app = initializeApp(environment.firebaseConfig);
+const db = getDatabase(app);
+const storage = getStorage(app);
+const auth = getAuth(app);
+
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
   constructor() { }
+
+   async getJobOffers() {
+    const jobOffersRef = ref(db, "JobOffers");
+    const snapshot = await get(jobOffersRef);
+    const jobOffers: JobOffer[] = [];
+    snapshot.forEach((companySnapshot) => {
+      companySnapshot.forEach((jobOfferSnapshot) => {
+        jobOffers.push(jobOfferSnapshot.val());
+      });
+    });
+    return jobOffers;
+  }
+  
+   async getUserDataByUid(uid:string){
+    const userRef = ref(db, `Users/${uid}`);
+    const snapshot = await get(userRef);
+  
+    if (snapshot.exists()) {
+      const { isCompany, name, profileImage } = snapshot.val();
+      return { isCompany, name, profileImage };
+    } else {
+      return null;
+    }
+  }
+  
+   async getImage(image:string){
+    const imageRef = storageRef(storage, image);
+    const url = await getDownloadURL(imageRef);
+    return url;
+  }
+  
+  userLogin(email: string, password: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      signInWithEmailAndPassword(auth, email, password)
+        .then(userCredential => {
+          const userId = userCredential.user.uid;
+          resolve(userId);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
 
    async getJobOffersByCompany(companyId: string) {
     const jobOffersRef = ref(db, `JobOffers/${companyId}`);
@@ -29,50 +78,10 @@ export class FirebaseService {
     const newJobOfferRef = push(jobOfferRef);
     await set(newJobOfferRef, jobOffer);
   }
+
+
 }
 
-const app = initializeApp(environment.firebaseConfig);
-const db = getDatabase(app);
-const storage = getStorage(app);
-const auth = getAuth(app);
-
-
-const jobOfferCollection = ref(db, 'JobOffers');
-
-export async function getJobOffers(){
-  return get(jobOfferCollection);
-}
-
-export async function getUserDataByUid(uid:string){
-  const userRef = ref(db, `Users/${uid}`);
-  const snapshot = await get(userRef);
-
-  if (snapshot.exists()) {
-    const { isCompany, name, profileImage } = snapshot.val();
-    return { isCompany, name, profileImage };
-  } else {
-    return null;
-  }
-}
-
-export async function getImage(image:string){
-  const imageRef = storageRef(storage, image);
-  const url = await getDownloadURL(imageRef);
-  return url;
-}
-
-export function userLogin(email: string, password: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then(userCredential => {
-        const userId = userCredential.user.uid;
-        resolve(userId);
-      })
-      .catch(error => {
-        reject(error);
-      });
-  });
-}
 
 
 

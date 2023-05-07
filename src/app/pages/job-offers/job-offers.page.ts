@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JobOffer } from 'src/app/models/JobOffer';
-import { getJobOffers, getImage } from 'src/app/services/firebase.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
 import { LocalStorage } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { LocalStorage } from 'src/app/services/local-storage.service';
 })
 export class JobOffersPage implements OnInit {
   profileImg: string = '';
-  filters: string[] = ['All', 'Remote', 'Applied', 'Freshers', 'Full-time', 'Part-time'];
+  filters: string[] = ['All','Full-time', 'Part-time', 'Internship', 'Freshers', 'Contrat', 'Temporary', 'Volunteer'];
   colors = ['#5424FD', '#F5001E', '#FFAC35'];
   selectedFilter: any;
   allJobOffers: JobOffer[] = [];
@@ -18,7 +18,7 @@ export class JobOffersPage implements OnInit {
   jobOffers: JobOffer[] =  [];
   userDetails: any;
 
-  constructor(private localStorage: LocalStorage) {}
+  constructor(private localStorage: LocalStorage, private firebaseService: FirebaseService) {}
 
 
   ngOnInit() {
@@ -47,29 +47,11 @@ export class JobOffersPage implements OnInit {
   }
 
   getAllJobOffers(){
-    getJobOffers().then(res => {
-      if (res.exists()) {
-        const data = res.val() as JobOffer;
-        const jobOffersArray = Object.values(data);
-    
-        jobOffersArray.forEach(jobOffer => {
-          this.allJobOffers.push({
-            company: jobOffer.company,
-            date: jobOffer.date,
-            imageCompany: jobOffer.imageCompany,
-            jobType: jobOffer.jobType,
-            location: jobOffer.location,
-            offerDescription: jobOffer.offerDescription,
-            roleDescription: jobOffer.roleDescription,
-            salary: jobOffer.salary,
-            skills: jobOffer.skills,
-            title: jobOffer.title,
-            workPlace: jobOffer.workPlace,
-          } as JobOffer);
+    this.firebaseService.getJobOffers().then(jobOffers => {
 
-        this.jobOffers = this.allJobOffers.slice();
-        });
-      }
+      this.allJobOffers = Object.values(jobOffers);
+      this.jobOffers = this.allJobOffers.slice();
+      
     }).catch((error => {
       console.error(error);
     }));
@@ -77,7 +59,7 @@ export class JobOffersPage implements OnInit {
   }
 
   getProfileImage(){
-    getImage(this.userDetails.profileImage).then(profileImage => {
+    this.firebaseService.getImage(this.userDetails.profileImage).then(profileImage => {
       this.profileImg = profileImage
     })
   }

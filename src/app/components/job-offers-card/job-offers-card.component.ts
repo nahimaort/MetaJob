@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { JobOffer } from '../../models/JobOffer';
-import { getImage } from '../../services/firebase.service';
+import { FirebaseService } from '../../services/firebase.service';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -14,10 +14,10 @@ export class JobOffersCardComponent implements OnInit {
   jobOfferImage: any;
   imageLoaded = false;
 
-  constructor(private navCtrl: NavController) { }
+  constructor(private navCtrl: NavController, private firebaseService: FirebaseService) { }
 
   ngOnInit() {
-    getImage(this.jobOffer.imageCompany).then(res =>{
+    this.firebaseService.getImage(this.jobOffer.imageCompany).then(res =>{
       this.jobOfferImage = res;
       this.imageLoaded = true;
     })
