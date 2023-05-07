@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { JobOffersPageRoutingModule } from './job-offers-routing.module';
+import { CompanyJobOffersPageRoutingModule } from './company-job-offers-routing.module';
 
-import { JobOffersPage } from './job-offers.page';
+import { CompanyJobOffersPage } from './company-job-offers.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ComponentsModule } from 'src/app/components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    JobOffersPageRoutingModule,
+    CompanyJobOffersPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [JobOffersPage]
+  declarations: [CompanyJobOffersPage]
 })
-export class JobOffersPageModule {}
+export class CompanyJobOffersPageModule {}

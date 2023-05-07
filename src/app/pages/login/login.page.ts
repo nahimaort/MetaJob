@@ -23,6 +23,7 @@ export class LoginPage implements OnInit {
       const userId = await userLogin(this.email, this.password);
 
       getUserDataByUid(userId).then(userDetails =>{
+        this.localStorage.setItem('userId', userId);
         this.localStorage.setItem('userDetails', userDetails);
       })
       const toast = await this.toastController.create({
@@ -32,7 +33,13 @@ export class LoginPage implements OnInit {
         color: 'success'
       });
       toast.present();
-      this.navCtrl.navigateForward('/job-offers')
+      
+      const isCompany = this.localStorage.getItem('userDetails').isCompany
+
+      if(isCompany == true)
+        this.navCtrl.navigateForward('/company-job-offers')
+      else
+        this.navCtrl.navigateForward('/job-offers')
 
     } catch (error) {
       console.error(error);

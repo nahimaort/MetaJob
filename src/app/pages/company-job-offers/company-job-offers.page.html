@@ -1,0 +1,21 @@
+<ion-content [fullscreen]="true" class="ion-align-items-center">
+  <div class="greetings-container">
+    <ion-text class="greetings">
+      Hello {{userDetails?.name}} 👋
+    </ion-text>
+    <ion-avatar>
+      <img [src]="profileImg" />
+    </ion-avatar>
+  </div>
+  <ion-text>
+    <h1>Your job offers</h1>
+    <ion-button (click)="addJobOffer()">Add Offer</ion-button>
+  </ion-text>
+  <div class="filters-container">
+    <ion-chip *ngFor="let filter of filters" [color]="selectedFilter === filter ? 'tertiary' : 'medium'">
+      <ion-label>{{ filter }}</ion-label>
+    </ion-chip>
+  </div>
+  <app-job-offers-card *ngFor="let companyJobOffer of companyJobOffers; let i = index" [jobOffer]="companyJobOffer" [color]="colors[i % colors.length]">
+  </app-job-offers-card>
+</ion-content>

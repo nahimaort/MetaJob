@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { getDatabase, ref, get, query, equalTo, child } from 'firebase/database';
+import { getDatabase, ref, get, query, equalTo, child, orderByChild, orderByKey } from 'firebase/database';
 import { environment } from 'src/environments/environment';
 import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
 import initializeApp = firebase.initializeApp;
+import { JobOffer } from '../models/JobOffer';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,20 @@ const jobOfferCollection = ref(db, 'JobOffers');
 
 export async function getJobOffers(){
   return get(jobOfferCollection);
+}
+
+export async function getJobOffersByCompany(companyId: string) {
+  const jobOffersQuery = query(
+    jobOfferCollection,
+    orderByKey(),
+    equalTo(companyId)
+  );
+  const snapshot = await get(jobOffersQuery);
+  const jobOffers: JobOffer[] = [];
+  snapshot.forEach((child) => {
+    jobOffers.push({ ...child.val() });
+  });
+  return jobOffers;
 }
 
 export async function getUserDataByUid(uid:string){

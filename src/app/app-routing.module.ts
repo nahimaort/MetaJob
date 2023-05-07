@@ -24,7 +24,12 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'company-job-offers',
+    loadChildren: () => import('./pages/company-job-offers/company-job-offers.module').then( m => m.CompanyJobOffersPageModule)
   }
+
 
 
 ];
