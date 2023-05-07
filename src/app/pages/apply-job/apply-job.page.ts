@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./apply-job.page.scss'],
 })
 export class ApplyJobPage implements OnInit {
+  fullname: any;
+  link: any;
+  cv: any;
+  coverletter: any;
 
   constructor() { }
 

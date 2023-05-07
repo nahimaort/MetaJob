@@ -9,13 +9,13 @@
   <div class="inputs">
     <div class="input">
       <ion-label>Full name</ion-label>
-      <ion-input type="text" placeholder=" Enter your full name" class="my-input">
+      <ion-input type="text" placeholder=" Enter your full name" class="my-input" [(ngModel)]="fullname">
       </ion-input>
     </div>
 
     <div class="input">
       <ion-label>Website, blog, or portfolio</ion-label>
-      <ion-input type="text" placeholder=" Enter your website" class="my-input">
+      <ion-input type="text" placeholder=" Enter your website" class="my-input" [(ngModel)]="link">
       </ion-input>
     </div>
 
@@ -26,14 +26,14 @@
           <ion-icon name="cloud-upload-outline" class="upload-icon"></ion-icon>
           <ion-label class="upload-text">Format DOC, PDF, JPG</ion-label>
           <ion-label class="browse-text">Browse files</ion-label>
-          <ion-input type="file" class="upload-input"></ion-input>
+          <ion-input type="file" class="upload-input" [(ngModel)]="cv"></ion-input>
         </div>
       </div>
     </div>
 
     <div class="input">
       <ion-label>Cover letter</ion-label>
-      <ion-textarea type="text" placeholder=" Write something..." class="my-input cover-letter">
+      <ion-textarea type="text" placeholder=" Write something..." class="my-input cover-letter" [(ngModel)]="coverletter">
       </ion-textarea>
     </div>
 
