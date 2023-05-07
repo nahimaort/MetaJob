@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { getDatabase, ref, get, push, set } from 'firebase/database';
+import { getDatabase, ref, get, push, set, query, orderByKey } from 'firebase/database';
 import { environment } from 'src/environments/environment';
 import { getStorage, ref as storageRef, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
-import initializeApp = firebase.initializeApp;
 import { JobOffer } from '../models/JobOffer';
 import { JobApplication } from '../models/JobApplication';
+import { v4 as uuidv4 } from 'uuid';
 
+import initializeApp = firebase.initializeApp;
 
 const app = initializeApp(environment.firebaseConfig);
 const db = getDatabase(app);
@@ -31,6 +32,19 @@ export class FirebaseService {
         const key = jobOfferSnapshot.key;
         jobOffers.push(Object.assign({}, jobOffer, { key }));
       });
+    });
+    return jobOffers;
+  }
+
+  async getJobOffersByCompany(companyId: string) {
+    const jobOffersRef = ref(db, `JobOffers/${companyId}`);
+    const snapshot = await get(jobOffersRef);
+    const jobOffers: JobOffer[] = [];
+    snapshot.forEach((jobOfferSnapshot) => {
+      const jobOffer = jobOfferSnapshot.val();
+      const key = jobOfferSnapshot.key;
+      jobOffers.push(Object.assign({}, jobOffer, { key }));
+
     });
     return jobOffers;
   }
@@ -70,16 +84,6 @@ export class FirebaseService {
     await auth.signOut();
   }
 
-   async getJobOffersByCompany(companyId: string) {
-    const jobOffersRef = ref(db, `JobOffers/${companyId}`);
-    const snapshot = await get(jobOffersRef);
-    const jobOffers: JobOffer[] = [];
-    snapshot.forEach((childSnapshot) => {
-      jobOffers.push(childSnapshot.val());
-    });
-    return jobOffers;
-  }
-
   async addJobOffer(userId: string, jobOffer: JobOffer) {
     const jobOfferRef = ref(db, `JobOffers/${userId}`);
     const newJobOfferRef = push(jobOfferRef);
@@ -87,17 +91,31 @@ export class FirebaseService {
   }
 
   async uploadCv(file: File, userId: string) {
-    const cvRef = storageRef(storage, `UserCVS/${userId}/${file.name}`);
+    const randomName = uuidv4();
+    const cvRef = storageRef(storage, `UserCVS/${userId}/${randomName}`);
     await uploadBytes(cvRef, file);
     return await getDownloadURL(cvRef);
   }
 
   async addJobOApplication(jobOfferId: string, userId: string, jobApplication: JobApplication) {
-    console.log(jobOfferId, userId, jobApplication);
     const jobApplicationRef = ref(db, `JobApplications/${jobOfferId}/${userId}`);
     const newJobOfferRef = push(jobApplicationRef);
     return await set(newJobOfferRef, jobApplication);
   }
+
+  async getJobApplicationsByJobOfferId(jobOfferId: string) {
+    const jobApplicationsRef = ref(db, `JobApplications/${jobOfferId}`);
+    const jobApplicationsQuery = query(jobApplicationsRef, orderByKey());
+    const snapshot = await get(jobApplicationsQuery);
+    const jobApplications: JobApplication[] = [];
+    snapshot.forEach((childSnapshot) => {
+      Object.values(childSnapshot.val()).forEach((applicant) => {
+        jobApplications.push(applicant as JobApplication);
+      });
+    });
+    return jobApplications;
+  }
+  
 }
 
 

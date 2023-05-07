@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { JobOffer } from '../../models/JobOffer';
 import { FirebaseService } from '../../services/firebase.service';
 import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-job-offers-card',
@@ -15,7 +16,7 @@ export class JobOffersCardComponent implements OnInit {
   jobOfferImage: any;
   imageLoaded = false;
 
-  constructor(private navCtrl: NavController, private firebaseService: FirebaseService) { }
+  constructor(private navCtrl: NavController, private firebaseService: FirebaseService, private router: Router) { }
 
   ngOnInit() {
     this.firebaseService.getImage(this.jobOffer.imageCompany).then(res =>{
@@ -37,7 +38,7 @@ export class JobOffersCardComponent implements OnInit {
 
   navigateToDetails() {
     if (this.company) {
-      this.navCtrl.navigateForward('/applicants');
+      this.router.navigate(['applicants'],{queryParams: { jobKey: this.jobOffer.key}});
     }
     else {
       this.navCtrl.navigateForward('/job-details', { state: { jobOffer: this.jobOffer, color: this.color } });

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import { stat } from 'fs';
+import { JobApplication } from 'src/app/models/JobApplication';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-applicants',
@@ -7,13 +10,49 @@ import {Router} from "@angular/router";
   styleUrls: ['./applicants.page.scss'],
 })
 export class ApplicantsPage implements OnInit {
+  jobKey: any;
+  jobApplications: JobApplication[] = [];
+  profileImages: Map<number, string> = new Map();
+  imageLoaded = false;
 
-  constructor(private router: Router) { }
+
+  constructor(private router: Router, private firebaseService: FirebaseService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.route.queryParams.subscribe(params => {
+      this.jobKey = params['jobKey'];
+    });
+
+    this.getAllJobOffers();
+    console.log(this.jobApplications)
+    
   }
+
+
+  getAllJobOffers() {
+    this.firebaseService.getJobApplicationsByJobOfferId(this.jobKey).then(jobApplications => {
+      this.jobApplications = jobApplications;
+      this.jobApplications.forEach((jobApplication, index) => {
+        this.getProfileImage(index, jobApplication.profileImage);
+      });
+      this.imageLoaded = true;
+    }).catch((error => {
+      console.error(error);
+    }));
+  }
+  
+
+  getProfileImage(index: number, profileImage: string) {
+    this.firebaseService.getImage(profileImage).then(profileImage => {
+      this.profileImages.set(index, profileImage);
+    })
+  }
+  
+  
 
   goToApplication() {
     this.router.navigate(['/application']);
   }
+
 }

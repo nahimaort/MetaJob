@@ -4,4 +4,6 @@ export interface JobApplication {
     link: string;
     cv: string;
     coverletter: string;
+    currentPosition: string;
+    profileImage: string;
   }
