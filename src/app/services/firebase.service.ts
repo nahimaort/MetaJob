@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getDatabase, ref, get, query, equalTo, child, orderByChild, orderByKey } from 'firebase/database';
+import { getDatabase, ref, get, query, equalTo, child, orderByChild, orderByKey, push, set } from 'firebase/database';
 import { environment } from 'src/environments/environment';
 import { getStorage, ref as storageRef, getDownloadURL } from 'firebase/storage';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
@@ -19,6 +19,7 @@ const app = initializeApp(environment.firebaseConfig);
 const db = getDatabase(app);
 const storage = getStorage(app);
 const auth = getAuth(app);
+
 
 const jobOfferCollection = ref(db, 'JobOffers');
 
@@ -41,7 +42,6 @@ export async function getJobOffersByCompany(companyId: string) {
 }
 
 export async function getUserDataByUid(uid:string){
-
   const userRef = ref(db, `Users/${uid}`);
   const snapshot = await get(userRef);
 
@@ -70,6 +70,12 @@ export function userLogin(email: string, password: string): Promise<string> {
         reject(error);
       });
   });
+}
+
+export async function addJobOffer(userId: string, jobOffer: JobOffer) {
+    const jobOfferRef = ref(db, `JobOffers/${userId}`);
+    const newJobOfferRef = push(jobOfferRef);
+    await set(newJobOfferRef, jobOffer);
 }
 
 
