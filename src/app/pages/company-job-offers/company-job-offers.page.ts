@@ -72,4 +72,11 @@ export class CompanyJobOffersPage implements OnInit {
     this.navCtrl.navigateForward('/add-job');
   }
 
+  logout(){
+    this.localStorage.removeItem('userDetails');
+    this.localStorage.removeItem('userId');
+    this.firebaseService.logout();
+    this.navCtrl.navigateForward('/onboarding')
+  }
+
 }

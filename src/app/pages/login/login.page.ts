@@ -22,16 +22,17 @@ export class LoginPage implements OnInit {
     try {
       const userId = await this.firebaseService.userLogin(this.email, this.password);
 
-      this.firebaseService.getUserDataByUid(userId).then(userDetails =>{
+      const userDetails = await this.firebaseService.getUserDataByUid(userId)
         this.localStorage.setItem('userId', userId);
         this.localStorage.setItem('userDetails', userDetails);
-      })
+
       const toast = await this.toastController.create({
         message: 'You signed succesfully',
         duration: 3000,
         position: 'bottom',
         color: 'success'
       });
+      
       toast.present();
       const isCompany = this.localStorage.getItem('userDetails').isCompany
 

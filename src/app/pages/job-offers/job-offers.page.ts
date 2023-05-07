@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { JobOffer } from 'src/app/models/JobOffer';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { LocalStorage } from 'src/app/services/local-storage.service';
@@ -18,7 +19,7 @@ export class JobOffersPage implements OnInit {
   jobOffers: JobOffer[] =  [];
   userDetails: any;
 
-  constructor(private localStorage: LocalStorage, private firebaseService: FirebaseService) {}
+  constructor(private localStorage: LocalStorage, private firebaseService: FirebaseService, private navCtrl: NavController) {}
 
 
   ngOnInit() {
@@ -62,5 +63,12 @@ export class JobOffersPage implements OnInit {
     this.firebaseService.getImage(this.userDetails.profileImage).then(profileImage => {
       this.profileImg = profileImage
     })
+  }
+
+  logout(){
+    this.localStorage.removeItem('userDetails');
+    this.localStorage.removeItem('userId');
+    this.firebaseService.logout();
+    this.navCtrl.navigateForward('/onboarding')
   }
 }

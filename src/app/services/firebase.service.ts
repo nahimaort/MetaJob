@@ -63,6 +63,10 @@ export class FirebaseService {
     });
   }
 
+  async logout() {
+    await auth.signOut();
+  }
+
    async getJobOffersByCompany(companyId: string) {
     const jobOffersRef = ref(db, `JobOffers/${companyId}`);
     const snapshot = await get(jobOffersRef);
