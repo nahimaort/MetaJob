@@ -12,6 +12,7 @@ export class LoginPage implements OnInit {
 
   email:string="";
   password:string=""
+  logoImg: string =  "../assets/images/logo.png";
 
   constructor(private toastController: ToastController, private navCtrl: NavController, private localStorage: LocalStorage, private firebaseService: FirebaseService) { }
 
@@ -32,7 +33,7 @@ export class LoginPage implements OnInit {
         position: 'bottom',
         color: 'success'
       });
-      
+
       toast.present();
       const isCompany = this.localStorage.getItem('userDetails').isCompany
 
