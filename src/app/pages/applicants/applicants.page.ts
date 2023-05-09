@@ -32,11 +32,14 @@ export class ApplicantsPage implements OnInit {
   getAllJobOffers() {
     this.firebaseService.getJobApplicationsByJobOfferId(this.jobKey).then(jobApplications => {
       this.jobApplications = jobApplications;
-      console.log(this.jobApplications);
       this.jobApplications.forEach((jobApplication, index) => {
         this.getProfileImage(index, jobApplication.applicant.datApplicant.profileImage);
       });
-      this.imageLoaded = true;
+
+      setTimeout(() => {
+        this.imageLoaded = true;
+      }, 1000);
+
     }).catch((error => {
       console.error(error);
     }));

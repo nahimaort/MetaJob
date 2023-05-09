@@ -90,3 +90,15 @@ ion-button {
   --background: #5424FD;
   margin-top: 2em;
 }
+
+ion-input.my-input {
+  --padding-start: 10px;
+}
+
+ion-textarea.my-input {
+  --padding-start: 10px;
+}
+
+ion-select.my-input {
+  --padding-start: 10px;
+}

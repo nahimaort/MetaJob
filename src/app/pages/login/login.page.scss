@@ -71,3 +71,7 @@ ion-label {
   display: flex;
   justify-content: center;
 }
+
+ion-input.my-input {
+  --padding-start: 10px;
+}

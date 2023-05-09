@@ -35,7 +35,7 @@ export class ApplicationPage implements OnInit {
     try {
         await this.firebaseService.deleteJobApplication(this.dataAplication.jobOfferId, this.dataAplication.userId);
         const toast = await this.toastController.create({
-          message: 'You have refected the application',
+          message: 'You have rejected the application',
           duration: 3000,
           position: 'bottom',
           color: 'success'
