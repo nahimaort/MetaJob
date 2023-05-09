@@ -19,6 +19,7 @@ export class ApplyJobPage implements OnInit {
   userId: any;
   cvUrl: any;
   jobKey: any;
+  cvImg: any = './assets/images/PDF.png';
 
   constructor(private localStorage: LocalStorage,
     private firebaseService: FirebaseService,

@@ -11,6 +11,7 @@ export class ApplicationPage implements OnInit {
   cvImg: any = './assets/images/PDF.png';
   dataAplication: any;
   isPdfViewerVisible = false;
+  pdfPreview: string = './assets/images/pdfPreview.jpg'
   
   constructor(private route: ActivatedRoute) { }
 
@@ -24,8 +25,7 @@ export class ApplicationPage implements OnInit {
 
   }
 
-
-  showPdfViewer() {
-    this.isPdfViewerVisible = true;
+  showPdf() {
+    this.isPdfViewerVisible =! this.isPdfViewerVisible;
   }
 }
