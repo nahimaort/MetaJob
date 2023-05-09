@@ -6,6 +6,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ng-container *ngIf="jobApplications.length > 0; else noApplications">
   <ion-list>
     <ion-item *ngFor="let jobApplication of jobApplications; let i = index" (click)="goToApplication(jobApplication)">
       <ion-row>
@@ -35,4 +36,8 @@
 
     </ion-item>
   </ion-list>
+</ng-container>
+<ng-template #noApplications>
+  <ion-text class="ion-text-center large blurred centered">There are no applicants for your job offer yet</ion-text>
+</ng-template>
 </ion-content>
