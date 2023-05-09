@@ -25,6 +25,7 @@
     "@capacitor/keyboard": "5.0.1",
     "@capacitor/status-bar": "5.0.1",
     "@ionic/angular": "^7.0.0",
+    "@ionic/cordova-builders": "^9.0.0",
     "firebase": "^9.21.0",
     "ionicons": "^7.0.0",
     "ngx-extended-pdf-viewer": "^17.0.0-alpha.4",
@@ -51,6 +52,7 @@
     "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
+    "cordova-android": "^10.1.2",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -64,10 +66,24 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "ts-node": "~8.3.0",
-    "typescript": "~4.8.4"
+    "typescript": "~4.8.4",
+    "cordova-plugin-statusbar": "2.4.2",
+    "cordova-plugin-device": "2.0.2",
+    "cordova-plugin-splashscreen": "5.0.2",
+    "cordova-plugin-ionic-webview": "^5.0.0",
+    "cordova-plugin-ionic-keyboard": "^2.0.5"
   },
   "description": "An Ionic project",
   "cordova": {
-    "plugins": {}
+    "plugins": {
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-keyboard": {}
+    },
+    "platforms": [
+      "android"
+    ]
   }
 }
