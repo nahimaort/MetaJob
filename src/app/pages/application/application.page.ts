@@ -54,4 +54,15 @@ export class ApplicationPage implements OnInit {
       this.navController.back();
     }
 }
+
+  async getInContact(){
+    const toast = await this.toastController.create({
+      message: 'COMING SOON!',
+      duration: 5000,
+      position: 'bottom',
+      color: 'warning'
+    });
+
+    toast.present();
+  }
 }
