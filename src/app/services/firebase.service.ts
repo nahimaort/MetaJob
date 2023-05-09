@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getDatabase, ref, get, push, set, query, orderByKey } from 'firebase/database';
+import { getDatabase, ref, get, push, set, query, orderByKey, orderByChild, equalTo, child, remove } from 'firebase/database';
 import { environment } from 'src/environments/environment';
 import { getStorage, ref as storageRef, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
@@ -98,6 +98,7 @@ export class FirebaseService {
   }
 
   async addJobOApplication(jobOfferId: string, userId: string, jobApplication: JobApplication) {
+    console.log(jobOfferId);
     const jobApplicationRef = ref(db, `JobApplications/${jobOfferId}/${userId}`);
     const newJobOfferRef = push(jobApplicationRef);
     return await set(newJobOfferRef, jobApplication);
@@ -109,17 +110,25 @@ export class FirebaseService {
     const snapshot = await get(jobApplicationsQuery);
     const jobApplications: JobApplication[] = [];
     snapshot.forEach((childSnapshot) => {
+      const userId = childSnapshot.key;
       Object.values(childSnapshot.val()).forEach((applicant) => {
-        jobApplications.push(applicant as JobApplication);
+        const jobApplication: any = {
+          applicant,
+          jobOfferId,
+          userId
+        };
+        jobApplications.push(jobApplication);
       });
     });
     return jobApplications;
   }
   
+
+  async deleteJobApplication(jobOfferId: string, userId: string) {
+    console.log(jobOfferId);
+    console.log(userId);
+    const jobApplicationRef = ref(db, `JobApplications/${jobOfferId}/${userId}`);
+    await remove(jobApplicationRef);
 }
-
-
-
-
-
-
+  
+}

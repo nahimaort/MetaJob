@@ -9,11 +9,11 @@
 <ion-content [fullscreen]="true" class="container">
   <div class="content">
     <ion-text class="title">Full name</ion-text>
-    <ion-text>{{dataAplication.fullname}}</ion-text>
+    <ion-text>{{dataAplication.applicant.datApplicant.fullname}}</ion-text>
   </div>
   <div class="content">
     <ion-text class="title">Website, blog, or portfolio</ion-text>
-    <ion-text>{{dataAplication.link}}</ion-text>
+    <ion-text>{{dataAplication.applicant.datApplicant.link}}</ion-text>
   </div>
   <div class="content" (click)="showPdf()">
     <ion-text class="title">CV</ion-text>
@@ -24,7 +24,7 @@
       <ion-col>
         <img class="pdfPrev" *ngIf="isPdfViewerVisible" [src]="pdfPreview"/>
         <ion-row>
-          <ion-text>{{dataAplication.fullname}} - CV - Application</ion-text>
+          <ion-text>{{dataAplication.applicant.datApplicant.fullname}} - CV - Application</ion-text>
         </ion-row>
         <ion-row>
           <ion-text><ion-text>951 Kb · 06 May 2023 at 11:30 am</ion-text></ion-text>
@@ -35,12 +35,12 @@
   </div>
   <div class="content">
     <ion-text class="title">Cover letter</ion-text>
-    <ion-text>{{dataAplication.coverletter}}</ion-text>
+    <ion-text>{{dataAplication.applicant.datApplicant.coverletter}}</ion-text>
   </div>
 
   <div class="button-container">
     <ion-button>Get in contact</ion-button>
-    <ion-button fill="outline" id="reject">Reject application</ion-button>
+    <ion-button fill="outline" id="reject" (click)="rejectJobApplication()">Reject application</ion-button>
   </div>
 
 </ion-content>

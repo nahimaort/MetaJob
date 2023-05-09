@@ -10,7 +10,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class ApplicantsPage implements OnInit {
   jobKey: any;
-  jobApplications: JobApplication[] = [];
+  jobApplications: any[] = [];
   profileImages: Map<number, string> = new Map();
   imageLoaded = false;
 
@@ -22,7 +22,9 @@ export class ApplicantsPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.jobKey = params['jobKey'];
     });
+  }
 
+  ionViewDidEnter(){
     this.getAllJobOffers();
   }
 
@@ -30,13 +32,15 @@ export class ApplicantsPage implements OnInit {
   getAllJobOffers() {
     this.firebaseService.getJobApplicationsByJobOfferId(this.jobKey).then(jobApplications => {
       this.jobApplications = jobApplications;
+      console.log(this.jobApplications);
       this.jobApplications.forEach((jobApplication, index) => {
-        this.getProfileImage(index, jobApplication.profileImage);
+        this.getProfileImage(index, jobApplication.applicant.datApplicant.profileImage);
       });
       this.imageLoaded = true;
     }).catch((error => {
       console.error(error);
     }));
+  
   }
   
 
@@ -47,6 +51,7 @@ export class ApplicantsPage implements OnInit {
   }
   
   goToApplication(jobApplication: any) {
+
     const applicationJson = JSON.stringify(jobApplication);
     this.router.navigate(['/application'],{queryParams: { application: applicationJson}});
   }

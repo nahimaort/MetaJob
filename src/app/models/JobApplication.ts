@@ -1,4 +1,5 @@
 export interface JobApplication {
+  datApplicant:{
     fullname: string;
     email: string;
     link: string;
@@ -6,4 +7,8 @@ export interface JobApplication {
     coverletter: string;
     currentPosition: string;
     profileImage: string;
+  },
+  jobOfferId: string;
+  userId: string;
+    
   }

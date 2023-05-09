@@ -36,23 +36,28 @@ export class ApplyJobPage implements OnInit {
   }
 
   jobApplication: JobApplication = {
-    fullname: '',
-    email: '',
-    link: '',
-    cv: '',
-    coverletter: '',
-    currentPosition: '',
-    profileImage: ''
+    datApplicant:{
+      fullname: '',
+      email: '',
+      link: '',
+      cv: '',
+      coverletter: '',
+      currentPosition: '',
+      profileImage: ''
+    },
+    jobOfferId: '',
+    userId: ''
+    
   };
 
   fillJobApplicationData(){
-    this.jobApplication.fullname = this.userDetails.name
-    this.jobApplication.email = this.userDetails.email
-    this.jobApplication.currentPosition = this.userDetails.currentPosition;
-    this.jobApplication.profileImage = this.userDetails.profileImage;
-    this.jobApplication.link = this.link.value?.toString() ?? '';
-    this.jobApplication.coverletter = this.coverletter.value?.toString() ?? '';
-    this.jobApplication.cv = this.cvUrl;
+    this.jobApplication.datApplicant.fullname = this.userDetails.name
+    this.jobApplication.datApplicant.email = this.userDetails.email
+    this.jobApplication.datApplicant.currentPosition = this.userDetails.currentPosition;
+    this.jobApplication.datApplicant.profileImage = this.userDetails.profileImage;
+    this.jobApplication.datApplicant.link = this.link.value?.toString() ?? '';
+    this.jobApplication.datApplicant.coverletter = this.coverletter.value?.toString() ?? '';
+    this.jobApplication.datApplicant.cv = this.cvUrl;
 
   }
 
